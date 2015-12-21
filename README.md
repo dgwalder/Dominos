@@ -5,7 +5,6 @@ Engineer: 	Damani Walder
 Project:	Dominos
 
 /*********************************/
-// Jamaican domino game - ReadMeFile
 
 	General Info
 	- consist of 'dominos' that have 2 numbers on it.
