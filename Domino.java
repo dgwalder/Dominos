@@ -19,19 +19,16 @@ public class Domino {
 	}
 	
 	//function which determines whether a domino is a double
-	//if side1 = side2
-	//returns 1 is it is a double, 0 if not
+	//returns true if it is a double, false otherwise 
 	public boolean isDouble()
 	{
-		if (this.getSide1() == this.getSide2())
+		if (this.getSide1() == this.getSide2()){
 			return true;
-		else 
-			return false;
+		}
+		return false;
 	}
-
 	
 	//make a function that just returns what that double is of
-	//then can use that in the deadDoubleInHand function
 	public int doubleIsOf()
 	{
 		if (this.isDouble()){
