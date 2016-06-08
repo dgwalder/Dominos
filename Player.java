@@ -9,9 +9,13 @@ public class Player {
 	//keeps track of how many dominos the person has left in their hand 
 	int numDominos = 0;
 	
-	public Player(Domino[] d){
-		this.numDominos = 7;
-		this.pDominos = d;
+	public Player(){
+		this.numDominos = 0;
+	}
+	
+	public void populateHand(Domino d){
+		this.pDominos[numDominos] = d;
+		numDominos++;
 	}
 	
 	//list of doubles in persons hand
