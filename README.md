@@ -38,6 +38,12 @@ Project:	Dominos
 				add the total of all the numbers on all their dominos. The person with the least 
 				total sum will win that game
 
+	
+	Assumptions
+	- a total of 28 dominos can never be played as someone would win before that happens 
+	- at least 4 turns pass before someone can win 
+ 		- (someone must have something to match within the first 4 turns)
+
 
 /*******************************/
 
@@ -106,35 +112,38 @@ Player Class
 		- when the dominos are dealt to the player, sort the list according to highest sum, therefore allowing you to play the highest sum domino which is available first  
 
 GameModel Class
-
+	---------
+	Attributes 
+	- GameBoard
 	- PlayerTurn
-		- attribute that stores the number of the player whos turn it is 
+		- attribute that stores the number of the player whose turn it is 
+	- numTurns
+		- attribute which stores the total number of turns that have been played
+	
+	---------
+	Methods
+	- initModel
+		- initialized the whole game
 	- hasWonGame
-		- determines whether that player has won the game
+		- determines whether a player has won the game
 		- if this is true for any player, the game is done
 	- nextTurn
-		- To cycle through turns
-		- adds 1 to the counter each time, if @ 4, resets to 1 (4 players, 4 distinct numbers 1-4)
+		- method which cycles through turns
 
-Class for dominos
-	Each domino wil have 2 attributes -> side 1 and side 2
+Domino Class 
+	---------
+	Attributes
+	- side1
+	- side2
+		- attributes representing the two sides of a domino
+	
+	---------
+	Methods
+	- isDouble 
+		- method that determines if the domino is a double 
+	
+	- DoubleIsOf
+		- method that returns what the double is of
+		- returns 7 if it is not a double
 
-	- isDouble - 1 if the domino is a double, 0 otherwise 
 
-
-/**********************/
-Assumptions
-
-- a total of 28 dominos can never be played as someone would win before that happens 
-- at least 4 turns pass before someone can win (someone must have something to match within the first
-	4 turns)
-- Each player class represents a hand
-- Each board represents a game
-- The game is finished when a player wins 
-
-
-/***************/
-Future Iteration
-
-- Add a function that will randomly generate the dominos for each hand 
-	- if a player gets 5 or more doubles to start with, then everyones hand is regenerated
