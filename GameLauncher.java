@@ -12,7 +12,7 @@ public class GameLauncher {
 	 */
 	public static void main(String args[])
 	{
-		System.out.println("Player Application launched.");
+		System.out.println("Domino Game launched.");
 		GameModel m = GameModel.instance();
 	}	
 }

@@ -10,9 +10,6 @@ public class DominoDeck {
 	public DominoDeck(){
 		deck = new ArrayList<Domino>();
 		
-		//Domino[] dominos = new Domino[28];
-		//int num = 0;
-		
 		for (int i=0;i<7;i++){
 			for (int j=i;j<7; j++){
 				Domino d = new Domino (i, j);

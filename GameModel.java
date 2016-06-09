@@ -1,9 +1,5 @@
 package GameFiles;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 //TODO make moves such as add domino to top and add to bottom
 
 //TODO fix hasWon method 
@@ -12,7 +8,7 @@ import java.util.List;
 
 public class GameModel {
 	GameBoard gb;
-	Player players [];
+	Player [] players;
 	static GameModel model = null;
 	
 	//stores the number corresponding to which player's turn it is 
@@ -24,11 +20,9 @@ public class GameModel {
 	
 	/** Creates a single GameModel. */	
 	public static GameModel instance(){
-		
 		if(model == null){
 			model = new GameModel();
 		}
-		
 		return model;
 	}
 	
@@ -60,11 +54,11 @@ public class GameModel {
 	}
 	
 	//function cycles through turns 
-		public void nextTurn()
-		{
-			if (this.playerTurn < 4)
-				this.playerTurn = playerTurn + 1;
-			else  
-				this.playerTurn = 1;
-		}
+	public void nextTurn()
+	{
+		if (this.playerTurn < 3)
+			this.playerTurn = playerTurn + 1;
+		else  
+			this.playerTurn = 0;
+	}
 }

@@ -1,11 +1,14 @@
 package GameFiles;
 
 //TODO create method that sums the dominos in a players hand
-//TODO move the has won method to the game model
+
+//TODO finish deadDouble method - after creating numCount in GameModel
+
+//TODO store the dominos as a list in order of highest sum 
 
 public class Player {
 	
-	Domino pDominos [];
+	Domino [] pDominos;
 	
 	//keeps a track of the number of doubles a player has in their hand
 	int numDoubles = 0;
@@ -25,15 +28,8 @@ public class Player {
 		numDominos++;
 	}
 	
-	//list of doubles in persons hand
-	//still in construction
-	
-	//list of dominoes with the highest sum starting at the highest
-	//still in construction
-		
-	//function which determines if a player has double 6
-	//function is ran at the start of the game
-	//returns 1 if they do, otherwise 0 
+	//method which determines if a player has double 6
+	//method will be ran at start of game 
 	public boolean haveDoubleSix(Domino d)
 	{
 		if(this.numDoubles>0){
@@ -52,21 +48,10 @@ public class Player {
 	//returns 1 if they do, otherwise 0 
 	public boolean isDeadDoubleInHand()
 	{
-		//Num count of that number is @ 6 and either of the ends is not equal to the number of that 
-		/*
-		if (numCount(isDoubleOf(list of doubles)) == 6) && (aEnd1 != (isDoubleOf(list of doubles))
-		*/
+		//Num count of that number is @ 6 and neither of the ends is equal to that number 
+		//if (numCount(isDoubleOf(list of doubles)) == 6) && (aEnd1 != (isDoubleOf(list of doubles))
+		
 		return false;
-	}
-
-	//function that determines whether the player has won
-	//runs AFTER the player completes their turn (because thats when the numDominoes would have already updated)
-	public boolean hasWonGame()
-	{
-		if (numDominos == 0)
-			return true;
-		else 
-			return false;
 	}
 	
 	public int getNumDoublesRemaining()

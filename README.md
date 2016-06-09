@@ -109,7 +109,8 @@ Player Class
 	---------
 	Pending Additions
 	- store the dominos using a list
-		- when the dominos are dealt to the player, sort the list according to highest sum, therefore allowing you to play the highest sum domino which is available first  
+		- when the dominos are dealt to the player, sort the list according to highest sum, 
+		therefore allowing you to play the highest sum domino which is available first  
 
 GameModel Class
 
