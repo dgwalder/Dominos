@@ -1,8 +1,12 @@
 package GameFiles;
 
+//TODO create method that sums the dominos in a players hand
+//TODO move the has won method to the game model
+
 public class Player {
 	
 	Domino pDominos [];
+	
 	//keeps a track of the number of doubles a player has in their hand
 	int numDoubles = 0;
 
@@ -15,6 +19,9 @@ public class Player {
 	
 	public void populateHand(Domino d){
 		this.pDominos[numDominos] = d;
+		if (pDominos[numDominos].isDouble()){
+			numDoubles ++;
+		}
 		numDominos++;
 	}
 	
@@ -62,10 +69,10 @@ public class Player {
 			return false;
 	}
 	
-	public int getNumDoubles()
+	public int getNumDoublesRemaining()
 	{
 		int num = 0;
-		for (int i = 0; i<7; i++){
+		for (int i = 0; i<numDominos; i++){
 			if(this.pDominos[i].isDouble()){
 				num++;
 			}

@@ -1,14 +1,13 @@
 package GameFiles;
 
 public class Domino {
-	int side1;
-	int side2;
+	private int side1;
+	private int side2;
 
 	public Domino(int s1, int s2){
 		this.side1 = s1;
 		this.side2 = s2;
 	}
-	
 	
 	public int getSide1(){
 		return this.side1;
@@ -22,10 +21,7 @@ public class Domino {
 	//returns true if it is a double, false otherwise 
 	public boolean isDouble()
 	{
-		if (this.getSide1() == this.getSide2()){
-			return true;
-		}
-		return false;
+		return this.getSide1() == this.getSide2();
 	}
 	
 	//make a function that just returns what that double is of
