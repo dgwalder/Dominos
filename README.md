@@ -112,7 +112,8 @@ Player Class
 		- when the dominos are dealt to the player, sort the list according to highest sum, therefore allowing you to play the highest sum domino which is available first  
 
 GameModel Class
-	---------
+
+	----------
 	Attributes 
 	- GameBoard
 	- PlayerTurn
@@ -130,8 +131,9 @@ GameModel Class
 	- nextTurn
 		- method which cycles through turns
 
-Domino Class 
-	---------
+Domino Class
+
+	----------
 	Attributes
 	- side1
 	- side2
