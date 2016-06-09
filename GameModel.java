@@ -5,12 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 //TODO make moves such as add domino to top and add to bottom
-//TODO move the creation of the dominos to its own class
-//TODO move the dealing out of dominos to players to its own method
 
-//TODO - move the hasWon method from player
-//		mod the hasWon method to also check the game block win criteria
+//TODO fix hasWon method 
 
+//TODO - add a num count for every number and numCount method
 
 public class GameModel {
 	GameBoard gb;
@@ -41,25 +39,24 @@ public class GameModel {
 	
 	//TODO - the first person to play(pose) is the player with the double six in their hand
 	void initModel (){
-		Domino[] dominos = new Domino[28];
-		int num = 0;
+		DominoDeck gameDeck = new DominoDeck();
+		gameDeck.shuffle();
 		
-		for (int i=0;i<7;i++){
-			for (int j=i;j<7; j++){
-				dominos[num] = new Domino (i, j);
-				num ++;
-			}	
-		}
-		
-		List<Integer> arrlist = new ArrayList<Integer>(28);
-		for (int k=0;k<28;k++){
-			arrlist.add(k);
-		}
-		Collections.shuffle(arrlist);
-		
-		for (int l=0;l<28;l++){
-			this.players[28%l].populateHand(dominos[(int) arrlist.remove(0)]);
+		for (int l=0;l<4;l++){
+			gameDeck.deal(players[l]);
 		} 
+	}
+	
+	//function that determines whether the player has won
+	//runs AFTER the current player completes their turn
+	public boolean hasWon(){
+		for (int i = 0;i<4;i++){
+			if (players[playerTurn].numDominos == 0){
+				return true;
+			}
+			// also check the game block win criteria
+		}	
+		return false;
 	}
 	
 	//function cycles through turns 
