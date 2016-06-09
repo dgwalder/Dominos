@@ -41,48 +41,80 @@ Project:	Dominos
 
 /*******************************/
 
-Class for board
-	Each board represents a game. The game ends when a player wins
-
-	- 2 attributes which signify the available ends, aEnd1 and aEnd2 
-	- if a double is played, then values for availabe ends do not change that turn
-	- isBlocked - that will be called after every play
-	- attribute that stores the number of the player whos turn it is 
+GameBoard Class
+	Represents the GameBoard
 	
-	************
-	Need to create this urgently it is crucial to a lot of the functions	
-	************
+	---------
+	Attributes 
+	- aEnd1 and aEnd2
+		- 2 attributes which signify the available ends of the curernt game  
+		- if a double is played, then values for availabe ends do not change that turn
+	- numDominos played
+		- stores the number of dominos which have been played 	
+
+	---------
+	Methods
+	- isBlocked
+		- method which will be called after every play
+		- method which determines if the game is blocked
+	
+	---------
+	Pending additions
 	- Have a running count of each number of a specific number played thus far
 		- would make it easier to find if the game is blocked 
 		- will be easy to know whether a double has died in someones hand 
 
-	- nextTurn
-		- To cycle through turns
-		- adds 1 to the counter each time, if @ 4, resets to 1 (4 players, 4 distinct numbers 1-4)
-
-Class for players/hand
-	To determine whether a player can play that turn, the program will first check if the doubles in 
+Player Class
+	Represents a player
+	
+	- To determine whether a player can play that turn, the program will first check if the doubles in 
 	that person's hand matches up with the current available options. Else, starting with the highest 
-	valued (with resoect to sum) domino, check if any side of that domino matches with the available
+	valued (with respect to sum) domino, check if any side of that domino matches with the available
 	options on the board
 
-	- Players start the game with 7 dominos
+	- Each player starts the game with 7 dominos
 
-	- have a running list of the doubles in that persons hand 
-	- have a running list of the dominos with the highest sum 
-	- have a runing count of dominos in that persons hand
+	---------
+	Attributes 
+	- Dominos
+		- Stores dominos currently in the players hand 
+	- numDoubles
+		- stores a running count of the doubles in that player's hand 
+	- numDominos 
+		- stores a runing count of the number of dominos in that persons hand 	
+
+	---------
+	Methods
+	- populateHand
+		- method used to add dominos to a players hand
+		- updates the running counts accordingly
 	
-	- haveDoubleSix - which is called at the start of every game
+	- haveDoubleSix
+		- determines whether a player has doubleSix 	
+	 	- called at the start of every game
 		- player with double six automatically begins the game
 
 	- deadDoubleInHand
-		- will be 1 if the player has a dead double in their hand, 0 otherwise
-		- intialized to value of 0
+		- method determines if a player has a deadDouble in their hand
+	
+	- getNumDoublesRemaining
+		- method which returns the number of doubles remaining in a players hand 	
+	
+	---------
+	Pending Additions
+	- store the dominos using a list
+		- when the dominos are dealt to the player, sort the list according to highest sum, therefore allowing you to play the highest sum domino which is available first  
 
+GameModel Class
+
+	- PlayerTurn
+		- attribute that stores the number of the player whos turn it is 
 	- hasWonGame
-		- determines whether that player has won the game. If any player has this as 1, the whole game
-			is finished
-
+		- determines whether that player has won the game
+		- if this is true for any player, the game is done
+	- nextTurn
+		- To cycle through turns
+		- adds 1 to the counter each time, if @ 4, resets to 1 (4 players, 4 distinct numbers 1-4)
 
 Class for dominos
 	Each domino wil have 2 attributes -> side 1 and side 2
