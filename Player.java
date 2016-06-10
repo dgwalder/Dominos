@@ -1,6 +1,4 @@
-package GameFiles;
-
-//TODO create method that sums the dominos in a players hand
+	package GameFiles;
 
 //TODO finish deadDouble method - after creating numCount in GameModel
 
@@ -43,6 +41,14 @@ public class Player {
 		}
 		return false;
 	}	
+	
+	public int sumDominos(){
+		int sum=0;
+		for(int i=0; i<=numDominos;i++){
+			 sum += pDominos[numDominos].getSum();
+		}
+		return sum;
+	}
 	
 	//function which determines whether a player has a dead double in their hand
 	//returns 1 if they do, otherwise 0 

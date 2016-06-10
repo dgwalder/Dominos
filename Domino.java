@@ -3,6 +3,7 @@ package GameFiles;
 public class Domino {
 	private int side1;
 	private int side2;
+	private int sum;
 
 	public Domino(int s1, int s2){
 		this.side1 = s1;
@@ -15,6 +16,10 @@ public class Domino {
 	
 	public int getSide2(){
 		return this.side2;
+	}
+	
+	public int getSum(){
+		return this.side2+this.side1;
 	}
 	
 	//function which determines whether a domino is a double
