@@ -4,7 +4,7 @@ package GameFiles;
 
 //TODO fix hasWon method 
 
-//TODO - add a num count for every number and numCount method
+//TODO numCount method?
 
 public class GameModel {
 	GameBoard gb;
@@ -17,6 +17,8 @@ public class GameModel {
 	//keeps track of how many turns have been played in the game so far
 	int numTurns;
 	
+	//keeps track of how much of each number has been played so far 
+	int [] numSum;
 	
 	/** Creates a single GameModel. */	
 	public static GameModel instance(){
@@ -29,6 +31,7 @@ public class GameModel {
 	GameModel(){
 		gb = new GameBoard();
 		players = new Player[4];
+		numSum = new int [6];
 	}
 	
 	//TODO - the first person to play(pose) is the player with the double six in their hand
