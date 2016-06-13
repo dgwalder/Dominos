@@ -1,10 +1,14 @@
-	package GameFiles;
+package GameFiles;
 
 //TODO finish deadDouble method - after creating numCount in GameModel
 
-//TODO store the dominos as a list in order of highest sum 
+//TODO - finish play method
+	
+//TODO - finish pose method
 
-public class Player {
+//TODO (if simulating game) -> sort domino in list based on sum of each domino 
+
+	public class Player {
 	
 	Domino [] pDominos;
 	
@@ -28,12 +32,12 @@ public class Player {
 	
 	//method which determines if a player has double 6
 	//method will be ran at start of game 
-	public boolean haveDoubleSix(Domino d)
+	public boolean haveDoubleSix()
 	{
-		if(this.numDoubles>0){
+		if(numDoubles>0){
 			for (int i=0;i<7;i++){
-				if(this.pDominos[i].isDouble()){
-					if(this.pDominos[i].getSide1() == 6){
+				if(pDominos[i].isDouble()){
+					if(pDominos[i].getSide1() == 6){
 						return true;	
 					}
 				}
@@ -54,12 +58,19 @@ public class Player {
 	//returns 1 if they do, otherwise 0 
 	public boolean isDeadDoubleInHand()
 	{
+		if (numDoubles > 0){
+			
+		}
+		//find the doubles in the players hand
+		//check that number against the numCount in GameModel
+		
 		//Num count of that number is @ 6 and neither of the ends is equal to that number 
 		//if (numCount(isDoubleOf(list of doubles)) == 6) && (aEnd1 != (isDoubleOf(list of doubles))
 		
 		return false;
 	}
 	
+	//method returns the number of doubles left in the player's hand
 	public int getNumDoublesRemaining()
 	{
 		int num = 0;
@@ -69,5 +80,16 @@ public class Player {
 			}
 		}
 		return num;
+	}
+	
+	//method responsible for posing doubleSix
+	void pose(){
+		//cycle thru dominos and find the double six
+		//play the double six
+	}
+	
+	//the play of the player
+	void play(GameBoard gb){
+		
 	}
 }
