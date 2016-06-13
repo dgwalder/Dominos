@@ -1,10 +1,6 @@
 package GameFiles;
 
-//TODO make moves such as add domino to top and add to bottom
-
-//TODO fix hasWon method 
-
-//TODO numCount method?
+//TODO finsih implementation of numSum
 
 public class GameModel {
 	GameBoard gb;
@@ -20,6 +16,10 @@ public class GameModel {
 	//keeps track of how much of each number has been played so far 
 	int [] numSum;
 	
+	//the winner
+	//intialized to 4 which does not represent a valid player 
+	int winner = 4;
+	
 	/** Creates a single GameModel. */	
 	public static GameModel instance(){
 		if(model == null){
@@ -34,7 +34,6 @@ public class GameModel {
 		numSum = new int [6];
 	}
 	
-	//TODO - the first person to play(pose) is the player with the double six in their hand
 	void initModel (){
 		DominoDeck gameDeck = new DominoDeck();
 		gameDeck.shuffle();
@@ -44,19 +43,48 @@ public class GameModel {
 		} 
 	}
 	
-	//function that determines whether the player has won
-	//runs AFTER the current player completes their turn
-	public boolean hasWon(){
-		for (int i = 0;i<4;i++){
-			if (players[playerTurn].numDominos == 0){
-				return true;
+	void playGame(){
+		//the player with doubleSix in their hand plays this domino first 
+		for (int i=0;i<4;i++){
+			if(players[i].haveDoubleSix()){
+				playerTurn=i;
 			}
-			// also check the game block win criteria
+		}
+		
+		//begin game
+		while(winner!= 4){
+			players[playerTurn].play(gb);
+			hasWon();
+			nextTurn();
+		}
+	}
+	
+	//method which determines whether a player has won the game 
+	public boolean hasWon(){
+		int currentSum;
+		
+		//intialized to a value higher than possible for hand of 7
+		int winSum = 64;
+		
+		if (players[playerTurn].numDominos == 0){
+			winner = playerTurn;
+			return true;
+		}
+		else if(gb.isBlocked()){
+			for(int i=0;i<4;i++){
+				currentSum = players[i].sumDominos();
+				//TODO - future add a condition if 2 players tie 
+				if (currentSum < winSum){
+					winSum = currentSum;
+					winner = i;
+				}
+			}
+			return true;
 		}	
 		return false;
 	}
 	
-	//function cycles through turns 
+	//method which cycles through turns for players  
 	public void nextTurn()
 	{
 		if (this.playerTurn < 3)
