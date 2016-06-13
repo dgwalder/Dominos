@@ -3,7 +3,6 @@ package GameFiles;
 public class Domino {
 	private int side1;
 	private int side2;
-	private int sum;
 
 	public Domino(int s1, int s2){
 		this.side1 = s1;
@@ -18,6 +17,7 @@ public class Domino {
 		return this.side2;
 	}
 	
+	//function which returns the sum of the two sides of the domino
 	public int getSum(){
 		return this.side2+this.side1;
 	}
