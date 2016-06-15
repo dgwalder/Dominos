@@ -48,7 +48,6 @@ Project:	Dominos
 /*******************************/
 
 GameBoard Class
-	Represents the GameBoard
 	
 	---------
 	Attributes 
@@ -71,7 +70,6 @@ GameBoard Class
 		- will be easy to know whether a double has died in someones hand 
 
 Player Class
-	Represents a player
 	
 	- To determine whether a player can play that turn, the program will first check if the doubles in 
 	that person's hand matches up with the current available options. Else, starting with the highest 
@@ -99,18 +97,18 @@ Player Class
 		- determines whether a player has doubleSix 	
 	 	- called at the start of every game
 		- player with double six automatically begins the game
-
-	- deadDoubleInHand
-		- method determines if a player has a deadDouble in their hand
-	
-	- getNumDoublesRemaining
-		- method which returns the number of doubles remaining in a players hand 	
 	
 	---------
-	Pending Additions
-	- store the dominos using a list
+	Possible Additions
+	- store the dominos using a sorted list
 		- when the dominos are dealt to the player, sort the list according to highest sum, 
-		therefore allowing you to play the highest sum domino which is available first  
+		therefore allowing you to play the highest sum domino which is available first
+	
+	- method: deadDoubleInHand
+		- method determines if a player has a deadDouble in their hand
+	
+	- method: getNumDoublesRemaining
+		- method which returns the number of doubles remaining in a players hand 
 
 GameModel Class
 
