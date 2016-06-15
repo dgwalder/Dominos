@@ -56,18 +56,16 @@ GameBoard Class
 		- if a double is played, then values for availabe ends do not change that turn
 	- numDominos played
 		- stores the number of dominos which have been played 	
+	
+	- numCount
+		- running count of each number of dominos containing a specific number which have 
+		  been played thus far
 
 	---------
 	Methods
 	- isBlocked
-		- method which will be called after every play
 		- method which determines if the game is blocked
 	
-	---------
-	Pending additions
-	- Have a running count of each number of a specific number played thus far
-		- would make it easier to find if the game is blocked 
-		- will be easy to know whether a double has died in someones hand 
 
 Player Class
 	
@@ -80,23 +78,28 @@ Player Class
 
 	---------
 	Attributes 
-	- Dominos
+	- hand
 		- Stores dominos currently in the players hand 
 	- numDoubles
 		- stores a running count of the doubles in that player's hand 
-	- numDominos 
+	
+	- numDominos ***will be removed due to ArrayList Impl*** 
 		- stores a runing count of the number of dominos in that persons hand 	
 
 	---------
 	Methods
 	- populateHand
 		- method used to add dominos to a players hand
-		- updates the running counts accordingly
+		- *** updates the running counts accordingly
+	- sumDominos
+		- sums all the dominos in a players hand
 	
-	- haveDoubleSix
-		- determines whether a player has doubleSix 	
-	 	- called at the start of every game
-		- player with double six automatically begins the game
+	- pose	
+		- method used to pose
+	
+	- play	
+		- method for playing dominos 
+		- called at a player's turn
 	
 	---------
 	Possible Additions
@@ -115,15 +118,20 @@ GameModel Class
 	----------
 	Attributes 
 	- GameBoard
+	- Player
 	- PlayerTurn
 		- attribute that stores the number of the player whose turn it is 
 	- numTurns
 		- attribute which stores the total number of turns that have been played
+	- winner
+		- stores the winner 
 	
 	---------
 	Methods
 	- initModel
-		- initialized the whole game
+		- method which initializes the model elements
+	- playGame
+		- method for gameplay
 	- hasWonGame
 		- determines whether a player has won the game
 		- if this is true for any player, the game is done
@@ -140,6 +148,9 @@ Domino Class
 	
 	---------
 	Methods
+
+	- getSum
+		- method which returns the sumn of both sides of domino
 	- isDouble 
 		- method that determines if the domino is a double 
 	
