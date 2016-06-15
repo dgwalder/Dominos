@@ -143,6 +143,7 @@ Domino Class
 	- isDouble 
 		- method that determines if the domino is a double 
 	
+	**Possible Removal - may be unnecessary ****
 	- DoubleIsOf
 		- method that returns what the double is of
 		- returns 7 if it is not a double
