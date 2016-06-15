@@ -3,7 +3,7 @@ package GameFiles;
 import java.util.ArrayList;
 import java.util.List;
 	
-//TODO - finish pose method
+//TODO - finish play method
 
 //TODO (if simulating game) -> sort domino in list based on sum of each domino 
 
@@ -29,24 +29,7 @@ public class Player {
 		}
 		//will be used for debugging purposes
 		numDominos++;
-	}
-	
-	//method which determines if a player has double 6
-	//method will be ran at start of game to determine which player
-	//plays first
-	/*public boolean haveDoubleSix()
-	{
-		if(numDoubles>0){
-			for (int i=0;i<hand.size();i++){
-				if(hand.get(i).isDouble()){
-					if(hand.get(i).getSide1() == 6){
-						return true;	
-					}
-				}
-			}
-		}
-		return false;
-	}*/	
+	}	
 	
 	public int sumDominos(){
 		int sum=0;
@@ -61,7 +44,8 @@ public class Player {
 		hand.remove(new Domino(6,6));
 		gb.setEnd1(6);
 		gb.setEnd2(6);
-		gb.changeNumDomPlayed(1);
+		gb.setNumDominosPlayed(1);
+		gb.numSum[6]++;
 	}
 		
 	//the play of the player

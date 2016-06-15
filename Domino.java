@@ -29,7 +29,10 @@ public class Domino {
 		return this.getSide1() == this.getSide2();
 	}
 	
+	/*
+	 * deemed unnecessary
 	//make a function that just returns what that double is of
+	 
 	public int doubleIsOf()
 	{
 		if (this.isDouble()){
@@ -39,4 +42,5 @@ public class Domino {
 			return 7;
 		}
 	}
+	*/
 }
