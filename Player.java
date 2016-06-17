@@ -1,11 +1,10 @@
 package GameFiles;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 	
 //TODO - finish play method
-
-//TODO (if simulating game) -> sort domino in list based on sum of each domino 
 
 public class Player {
 	//list of dominos in players hand
@@ -22,6 +21,7 @@ public class Player {
 		this.hand = new ArrayList<Domino>();
 	}
 	
+	//adds dominos to a player's hand
 	public void populateHand(Domino d){
 		hand.add(d);
 		if (d.isDouble()){
@@ -31,6 +31,22 @@ public class Player {
 		numDominos++;
 	}	
 	
+	//sort the hand by order of the sum
+	//then puts the doubles at the front of the hand
+	public void handSort(){
+		hand.sort(new Comparator<Domino>() {
+	        public int compare(Domino d1, Domino d2) {
+	            return d2.getSum2().compareTo(d1.getSum2());
+	        }
+	    });
+		for (int i=0; i<hand.size();i++){
+			if(hand.get(i).isDouble()){
+				hand.add(0, hand.remove(i));
+			}
+		}
+	}
+	
+	//sums all dominos in a players hand
 	public int sumDominos(){
 		int sum=0;
 		for(int i=0; i<=hand.size();i++){
@@ -50,7 +66,29 @@ public class Player {
 		
 	//the play of the player
 	void play(GameBoard gb){
+		//check first if is possible to play a double
+		for (int i=0; i<numDoubles;i++){
+			if (hand.get(i).getSide1()== gb.getEnd1()){
+				hand.remove(i);
+				gb.setNumDominosPlayed(1);
+				numDoubles--;
+				return;
+			}
+			else if (hand.get(i).getSide1()== gb.getEnd2()){
+				hand.remove(i);
+				gb.setNumDominosPlayed(1);
+				numDoubles--;
+				return;
+			}
+		}
 		
+		//if it is not possible to play a double then check all cards
+		//starting with the one with the highest sum
+		for (int j=numDoubles; j<hand.size();j++){
+			//if one of the sides of the dominos is equal to either end
+			//update the new end to reflect that of the opposite side of domino
+			//remove that domino from the players hand, update the numDominosPlayed
+		}
 	}
 	
 	
@@ -69,17 +107,4 @@ public class Player {
 		
 		return false;
 	}
-	
-	//method returns the number of doubles left in the player's hand
-	public int getNumDoublesRemaining()
-	{
-		int num = 0;
-		for (int i = 0; i<numDominos; i++){
-			if(this.pDominos[i].isDouble()){
-				num++;
-			}
-		}
-		return num;
-	}
-	*/
 }
