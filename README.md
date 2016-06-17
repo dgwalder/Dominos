@@ -48,7 +48,6 @@ Project:	Dominos
 /*******************************/
 
 GameBoard Class
-	Represents the GameBoard
 	
 	---------
 	Attributes 
@@ -57,21 +56,18 @@ GameBoard Class
 		- if a double is played, then values for availabe ends do not change that turn
 	- numDominos played
 		- stores the number of dominos which have been played 	
+	
+	- numCount
+		- running count of each number of dominos containing a specific number which have 
+		  been played thus far
 
 	---------
 	Methods
 	- isBlocked
-		- method which will be called after every play
 		- method which determines if the game is blocked
 	
-	---------
-	Pending additions
-	- Have a running count of each number of a specific number played thus far
-		- would make it easier to find if the game is blocked 
-		- will be easy to know whether a double has died in someones hand 
 
 Player Class
-	Represents a player
 	
 	- To determine whether a player can play that turn, the program will first check if the doubles in 
 	that person's hand matches up with the current available options. Else, starting with the highest 
@@ -82,50 +78,60 @@ Player Class
 
 	---------
 	Attributes 
-	- Dominos
+	- hand
 		- Stores dominos currently in the players hand 
 	- numDoubles
 		- stores a running count of the doubles in that player's hand 
-	- numDominos 
+	
+	- numDominos ***will be removed due to ArrayList Impl*** 
 		- stores a runing count of the number of dominos in that persons hand 	
 
 	---------
 	Methods
 	- populateHand
 		- method used to add dominos to a players hand
-		- updates the running counts accordingly
+		- *** updates the running counts accordingly
+	- sumDominos
+		- sums all the dominos in a players hand
 	
-	- haveDoubleSix
-		- determines whether a player has doubleSix 	
-	 	- called at the start of every game
-		- player with double six automatically begins the game
-
-	- deadDoubleInHand
-		- method determines if a player has a deadDouble in their hand
+	- pose	
+		- method used to pose
 	
-	- getNumDoublesRemaining
-		- method which returns the number of doubles remaining in a players hand 	
+	- play	
+		- method for playing dominos 
+		- called at a player's turn
 	
 	---------
-	Pending Additions
-	- store the dominos using a list
+	Possible Additions
+	- store the dominos using a sorted list
 		- when the dominos are dealt to the player, sort the list according to highest sum, 
-		therefore allowing you to play the highest sum domino which is available first  
+		therefore allowing you to play the highest sum domino which is available first
+	
+	- method: deadDoubleInHand
+		- method determines if a player has a deadDouble in their hand
+	
+	- method: getNumDoublesRemaining
+		- method which returns the number of doubles remaining in a players hand 
 
 GameModel Class
 
 	----------
 	Attributes 
 	- GameBoard
+	- Player
 	- PlayerTurn
 		- attribute that stores the number of the player whose turn it is 
 	- numTurns
 		- attribute which stores the total number of turns that have been played
+	- winner
+		- stores the winner 
 	
 	---------
 	Methods
 	- initModel
-		- initialized the whole game
+		- method which initializes the model elements
+	- playGame
+		- method for gameplay
 	- hasWonGame
 		- determines whether a player has won the game
 		- if this is true for any player, the game is done
@@ -142,9 +148,13 @@ Domino Class
 	
 	---------
 	Methods
+
+	- getSum
+		- method which returns the sumn of both sides of domino
 	- isDouble 
 		- method that determines if the domino is a double 
 	
+	**Possible Removal - may be unnecessary ****
 	- DoubleIsOf
 		- method that returns what the double is of
 		- returns 7 if it is not a double
