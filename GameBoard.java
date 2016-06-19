@@ -43,13 +43,10 @@ public class GameBoard {
 	{
 		if (aEnd1 == aEnd2)
 		{
-			if (aEnd1 == 2){
-				//TODO - check if the 7 dominos containing the number at that end has been played
+			if (numSum[aEnd1] >= 6){
 				return true;
 			}
 		}
 		return false;
 	}
-
-	
 }
