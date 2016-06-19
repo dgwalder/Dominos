@@ -14,5 +14,7 @@ public class GameLauncher {
 	{
 		System.out.println("Domino Game launched.");
 		GameModel m = GameModel.instance();
+		m.initModel();
+		m.playGame();
 	}	
 }
