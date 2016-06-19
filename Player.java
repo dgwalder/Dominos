@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 	
-//TODO - finish play method
-
 public class Player {
 	//list of dominos in players hand
 	List<Domino> hand;
@@ -64,31 +62,56 @@ public class Player {
 		gb.numSum[6]++;
 	}
 		
-	//the play of the player
+	//this method determines play of the player
+
+	//if one of the sides of the dominos is equal to either end
+	//update the new end to reflect that of the opposite side of domino
+	//remove that domino from the players hand, update the numDominosPlayed
+	
+	//if no move is available, the player passes this turn
 	void play(GameBoard gb){
 		//check first if is possible to play a double
 		for (int i=0; i<numDoubles;i++){
-			if (hand.get(i).getSide1()== gb.getEnd1()){
+			if (hand.get(i).getSide1()== gb.getEnd1() || hand.get(i).getSide1()== gb.getEnd2()){
+				gb.numSum[hand.get(i).getSide1()]++;
 				hand.remove(i);
 				gb.setNumDominosPlayed(1);
-				numDoubles--;
-				return;
-			}
-			else if (hand.get(i).getSide1()== gb.getEnd2()){
-				hand.remove(i);
-				gb.setNumDominosPlayed(1);
+				numDominos--;
 				numDoubles--;
 				return;
 			}
 		}
 		
-		//if it is not possible to play a double then check all cards
-		//starting with the one with the highest sum
+		//if it is not possible to play a double then check the other
+		//remaining dominos for available plays 
 		for (int j=numDoubles; j<hand.size();j++){
-			//if one of the sides of the dominos is equal to either end
-			//update the new end to reflect that of the opposite side of domino
-			//remove that domino from the players hand, update the numDominosPlayed
+			int play=0;
+			if (hand.get(j).getSide1() == gb.getEnd1()){
+				gb.setEnd1(hand.get(j).getSide2());
+				play=1;	
+			}else if (hand.get(j).getSide2() == gb.getEnd1()){
+				gb.setEnd1(hand.get(j).getSide1());
+				play=1;	
+			}else if (hand.get(j).getSide1() == gb.getEnd2()){
+				gb.setEnd2(hand.get(j).getSide2());
+				play=1;
+			}else if (hand.get(j).getSide2() == gb.getEnd2()){
+				gb.setEnd2(hand.get(j).getSide1());
+				play=1;
+			}
+			
+			if(play == 1){
+				gb.numSum[hand.get(j).getSide1()]++;
+				gb.numSum[hand.get(j).getSide2()]++;
+				hand.remove(j);
+				gb.setNumDominosPlayed(1);
+				numDominos--;
+				return;
+			}
 		}
+		//if there are no available moves this turn for this player 
+		System.out.println("This player has passed");
+		return;
 	}
 	
 	
@@ -107,4 +130,17 @@ public class Player {
 		
 		return false;
 	}
+	
+	//method returns the number of doubles left in the player's hand
+	public int getNumDoublesRemaining()
+	{
+		int num = 0;
+		for (int i = 0; i<numDominos; i++){
+			if(this.pDominos[i].isDouble()){
+				num++;
+			}
+		}
+		return num;
+	}
+	*/
 }
