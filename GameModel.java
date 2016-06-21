@@ -1,7 +1,5 @@
 package GameFiles;
 
-//TODO implementation of numSum for use with is blocked
-
 public class GameModel {
 	GameBoard gb;
 	Player [] player;
@@ -34,11 +32,14 @@ public class GameModel {
 	void initModel (){
 		DominoDeck gameDeck = new DominoDeck();
 		gameDeck.shuffle();
-		
-		for (int l=0;l<4;l++){
-			gameDeck.deal(player[l]);
-			player[l].handSort();
+	
+		for (int l=0;l<gameDeck.getSize();l++){
+			player[l%4].populateHand(gameDeck.deal());
 		} 
+
+		for (int i=0;i<4;i++){
+			player[i].handSort();
+		}
 	}
 	
 	void playGame(){
@@ -48,6 +49,7 @@ public class GameModel {
 				playerTurn=i;
 			}
 		}
+		System.out.println("Gameplay");
 		
 		//begin gameplay
 		player[playerTurn].pose(gb);
@@ -68,6 +70,8 @@ public class GameModel {
 		
 		if (player[playerTurn].numDominos == 0){
 			winner = playerTurn;
+			System.out.print(winner);
+			System.out.println("is the winner");
 			return true;
 		}
 		else if(gb.isBlocked()){
@@ -79,6 +83,8 @@ public class GameModel {
 					winner = i;
 				}
 			}
+			System.out.print(winner);
+			System.out.println("is the winner");
 			return true;
 		}	
 		return false;
@@ -87,6 +93,7 @@ public class GameModel {
 	//method which cycles through turns for players  
 	public void nextTurn()
 	{
+		System.out.println("another turn");
 		if (this.playerTurn < 3)
 			this.playerTurn = playerTurn + 1;
 		else  
