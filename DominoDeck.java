@@ -17,14 +17,15 @@ public class DominoDeck {
 			}	
 		}
 	}
+	public int getSize(){
+		return deck.size();
+	}
 	
 	public void shuffle(){
 		Collections.shuffle(deck);
 	}
 	
-	public void deal(Player p){
-		for(int i=0;i<7;i++){
-			p.populateHand(deck.remove(0));
-		}
+	public Domino deal(){
+		return deck.remove(0);
 	}
 }
