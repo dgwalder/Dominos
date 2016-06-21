@@ -16,6 +16,7 @@ public class Player {
 	
 	public Player(){
 		this.numDominos = 0;
+		int numDoubles = 0;
 		this.hand = new ArrayList<Domino>();
 	}
 	
@@ -129,18 +130,6 @@ public class Player {
 		//if (numCount(isDoubleOf(list of doubles)) == 6) && (aEnd1 != (isDoubleOf(list of doubles))
 		
 		return false;
-	}
+	}*/
 	
-	//method returns the number of doubles left in the player's hand
-	public int getNumDoublesRemaining()
-	{
-		int num = 0;
-		for (int i = 0; i<numDominos; i++){
-			if(this.pDominos[i].isDouble()){
-				num++;
-			}
-		}
-		return num;
-	}
-	*/
 }
