@@ -1,19 +1,19 @@
-package GameFiles;
+package GameCode;
 
 public class Domino {
 	private int side1;
 	private int side2;
 
-	public Domino(int s1, int s2){
+	Domino(int s1, int s2){
 		this.side1 = s1;
 		this.side2 = s2;
 	}
 	
-	public int getSide1(){
+	int getSide1(){
 		return this.side1;
 	}
 	
-	public int getSide2(){
+	int getSide2(){
 		return this.side2;
 	}
 	
@@ -22,25 +22,23 @@ public class Domino {
 		return this.side2+this.side1;
 	}
 	
-	//function which determines whether a domino is a double
-	//returns true if it is a double, false otherwise 
-	public boolean isDouble()
-	{
-		return this.getSide1() == this.getSide2();
+	public Integer getSum2(){
+		return this.side2+this.side1;
 	}
 	
-	/*
-	 * deemed unnecessary
-	//make a function that just returns what that double is of
-	 
-	public int doubleIsOf()
+	//function determines whether a domino is a double
+	public boolean isDouble()
 	{
-		if (this.isDouble()){
-			return this.getSide1();
-		}
-		else{
-			return 7;
-		}
+		return getSide1() == getSide2();
 	}
-	*/
+
+	@Override
+	public String toString() {
+		return side1 + "||" + side2;
+	}
+
+	boolean equals(Domino domino) {
+		return ((side1 == domino.side1) && (side2 == domino.side2)) ||
+			((side1 == domino.side2) && (side2 == domino.side1));
+	}
 }
