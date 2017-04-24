@@ -1,22 +1,24 @@
-package GameFiles;
+package GameCode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import GameCode.GameBoard;
+import GameCode.Domino;
+import GameCode.DominoDeck;
 
 public class GameModel {
+	private List<Player> player;
 	GameBoard gb;
-	Player [] player;
-	static GameModel model = null;
+	static GameModel model;
 	
-	//stores the number corresponding to which player's turn it is 
-	int playerTurn; 
-		
-	//keeps track of how many turns have been played in the game so far
-	int numTurns;
+	int playerTurn;
+	int winner;
 	
-	
-	//stores the winner of the game
-	//intialized to 4 which does not represent a valid player 
-	int winner = 4;
-	
-	/** Creates a single GameModel. */	
+	/** 
+	 * Creates a single GameModel. 
+	 */	
 	public static GameModel instance(){
 		if(model == null){
 			model = new GameModel();
@@ -24,56 +26,130 @@ public class GameModel {
 		return model;
 	}
 	
+	public List<Player> getPlayers(){
+		return player;
+	}
+	/*
+	 * GameModel Constructor
+	 */
 	GameModel(){
+		initModel();
+	}
+	
+	/**
+	 * Initializes the game model
+	 */
+	
+	private void initModel (){
+		player = createPlayers();
 		gb = new GameBoard();
-		player = new Player[4];
-	}
-	
-	void initModel (){
 		DominoDeck gameDeck = new DominoDeck();
-		gameDeck.shuffle();
+		
+		distributeDominos(gameDeck);
 	
-		for (int l=0;l<gameDeck.getSize();l++){
-			player[l%4].populateHand(gameDeck.deal());
-		} 
-
-		for (int i=0;i<4;i++){
-			player[i].handSort();
-		}
+		//Print hand
+		player.forEach(Player::printHand);
+		
+		System.out.println("Initialization Complete");
+		System.out.println();
 	}
 	
+	/**
+	 * Game play
+	 */
 	void playGame(){
-		//the player with doubleSix in their hand plays this domino first 
-		for (int i=0;i<4;i++){
-			if(player[i].hand.contains(new Domino(6,6))){
-				playerTurn=i;
-			}
-		}
-		System.out.println("Gameplay");
-		
-		//begin gameplay
-		player[playerTurn].pose(gb);
-		nextTurn();
-		while(winner!= 4){
-			player[playerTurn].play(gb);
+		Domino x;
+
+		System.out.println("Game play has begun");
+
+		pose();
+
+		//Gameplay
+		int count = 0;
+		while(winner!= 7 && count != 8){
+			player.get(playerTurn).play(gb);
 			hasWon();
 			nextTurn();
+			count ++;
 		}
+
+		System.out.println("Game play is over");
+	}
+	
+	/**
+	 * Creates the players of the game 
+	 * @return list of Players 
+	 */
+	private ArrayList<Player> createPlayers(){
+		ArrayList<Player> playerList = new ArrayList<Player>();
+		
+		playerList.add(new Player("Player 1", 0));
+		playerList.add(new Player("Player 2", 1));
+		playerList.add(new Player("Player 3", 2));
+		playerList.add(new Player("Player 4", 3));
+		return playerList;
+	}
+	
+	/**
+	 * Distributes cards to the players 
+	 */
+	private void distributeDominos(DominoDeck deck){
+		player.forEach(p-> {
+			for (int i=0;i<7;i++){
+				p.addDomino(deck.deal());
+			}
+		});	
+	}
+	
+	/**
+	 * Player with double six poses
+	 */
+	void pose(){
+		//the player with doubleSix in their hand plays this domino first
+		for (Player p: player){
+			if(p.doesPlayerPose()){
+				playerTurn = p.playerNum;
+				p.removeFromHand(new Domino(6,6));
+				gb.pose(new Domino(6,6));
+				break;
+			}
+		}
+
+		System.out.println(player.get(playerTurn).playerName + " posed");
+		System.out.println(" ---------");
+		System.out.println();
+		nextTurn();
+	}
+	
+	/**
+	 * Cycles through player turns
+	 */
+	private void nextTurn()
+	{
+		if (playerTurn < player.size()-1)
+			playerTurn = playerTurn + 1;
+		else  
+			playerTurn = 0;
+		System.out.println(player.get(playerTurn).playerName + "'s turn");
+		System.out.print("Available Ends -> ");
+		System.out.print(gb.getEnd1());
+		System.out.println(" || " + gb.getEnd1());
+		
 	}
 	
 	//method which determines whether a player has won the game 
-	public boolean hasWon(){
-		int currentSum;
+	boolean hasWon(){
+		//int currentSum;
 		
 		//intialized to a value higher than possible for hand of 7
-		int winSum = 64;
+		//int winSum = 64;
 		
-		if (player[playerTurn].numDominos == 0){
+		if (player.get(playerTurn).getNumInHand() == 0){
 			winner = playerTurn;
-			System.out.print(winner);
-			System.out.println("is the winner");
+			System.out.print(player.get(playerTurn).playerName + " is the winner");
 			return true;
 		}
+		/*
 		else if(gb.isBlocked()){
 			for(int i=0;i<4;i++){
 				currentSum = player[i].sumDominos();
@@ -86,17 +162,8 @@ public class GameModel {
 			System.out.print(winner);
 			System.out.println("is the winner");
 			return true;
-		}	
+		}
+		*/	
 		return false;
-	}
-	
-	//method which cycles through turns for players  
-	public void nextTurn()
-	{
-		System.out.println("another turn");
-		if (this.playerTurn < 3)
-			this.playerTurn = playerTurn + 1;
-		else  
-			this.playerTurn = 0;
 	}
 }
