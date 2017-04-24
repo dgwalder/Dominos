@@ -1,14 +1,25 @@
-package GameFiles;
+package GameCode;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DominoDeck {
+final class DominoDeck {
 	private List<Domino> deck;
 	
-	public DominoDeck(){
-		deck = new ArrayList<Domino>();
+	/**
+	 * Constructor for domino deck
+	 */
+	DominoDeck(){
+		createDeck();
+		shuffle();
+	}
+	
+	/**
+	 * Creates Dominos and adds them to the deck
+	 */
+	private void createDeck(){
+		deck = new ArrayList<>();
 		
 		for (int i=0;i<7;i++){
 			for (int j=i;j<7; j++){
@@ -17,15 +28,19 @@ public class DominoDeck {
 			}	
 		}
 	}
-	public int getSize(){
-		return deck.size();
-	}
 	
-	public void shuffle(){
+	/**
+	 * Shuffles the deck
+	 */
+	private void shuffle(){
 		Collections.shuffle(deck);
 	}
 	
-	public Domino deal(){
+	/**
+	 * Deals a single domino from the deck
+	 * @return domino
+	 */
+	Domino deal(){
 		return deck.remove(0);
 	}
 }
